@@ -78,9 +78,11 @@ function checkGameNotReady(message){
         let id = message.game_id;
 
         try{
-            let value = await redisClient.hget('games:'+id,'is_ready');
-            //console.log(value.length);
-            if(value=="0"){
+            let value = await redisClient.hgetall('games:'+id);
+            
+            let user = await getUserInfo(message);
+
+            if(value.is_ready=="0" && parseInt(user.total_money)>=parseInt(value.bet_money)){
                 resolve(true);
             }
             else resolve(false);

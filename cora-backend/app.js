@@ -100,7 +100,7 @@ io.on("connection",socket=>{
                 let game = await gameServices.createGameInRedis(message);
                 socket.join(game.id);
 
-                io.to(message.socket_id).emit("create-game-from-server",{game_id: game.id, token: "vuong"});
+                io.to(message.socket_id).emit("create-game-from-server",{game_id: game.id});
                 
             }
             else{
