@@ -79,6 +79,9 @@ io.on("connection",socket=>{
                     info: list_ignore[i]
                 }));
             }
+
+            //
+            delete socket_user[socket.id];
         }
         catch(err){
             io.to(socket.id).emit("ignore-game-from-server",{
