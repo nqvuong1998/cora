@@ -78,6 +78,7 @@ io.on("connection",socket=>{
                     status: "ignore game",
                     info: list_ignore[i]
                 }));
+                delete game_board[list_ignore[i].id];
             }
 
             //
@@ -222,7 +223,7 @@ io.on("connection",socket=>{
             let game = await gameServices.isAllowTurnGame(message);
             if(game!=null){
                 let newGame = await gameServices.setNewInfoGame(game,[1],true, true)
-
+                delete game_board[message.game_id];
                 io.to(message.game_id).emit("ignore-game-from-server",JSON.stringify({
                     status: "ignore game",
                     info: newGame
